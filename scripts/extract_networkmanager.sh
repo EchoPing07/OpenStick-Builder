@@ -19,10 +19,13 @@ EOF
     networkmanager-dnsmasq \
     networkmanager-tui \
     networkmanager-wifi \
-    networkmanager-wwan \
     wpa_supplicant
 
 mkdir -p ${BASE}/new/etc
+mkdir -p ${CHROOT}/usr/share/dbus-1/system-services
+mkdir -p ${CHROOT}/usr/share/dbus-1/system.d
+mkdir -p ${CHROOT}/usr/share/polkit-1/actions
+mkdir -p ${CHROOT}/usr/share/polkit-1/rules.d
 
 cp ${BASE}/usr/share/dbus-1/system-services/*nm* ${CHROOT}/usr/share/dbus-1/system-services
 cp ${BASE}/usr/share/dbus-1/system-services/*wp* ${CHROOT}/usr/share/dbus-1/system-services
@@ -96,7 +99,6 @@ files="
     /usr/libexec/nm-dhcp-helper
     /usr/libexec/nm-dispatcher
     /usr/libexec/nm-priv-helper
-    /usr/lib/NetworkManager/1.46.6/libnm-wwan.so
 "
 for f in ${files}; do
     target_dir=/new$(dirname ${f})
